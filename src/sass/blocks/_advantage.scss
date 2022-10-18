@@ -1,0 +1,70 @@
+.advantage {
+    background-color: #F6F6F6;
+    padding: 70px 0 65px 0;
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 65px;
+    }
+
+    &__card {
+        max-width: 277px;
+    }
+
+    &__icon {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__title {
+        font-size: 18px;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
+    &__description {
+        font-size: 14px;
+        font-weight: 300;
+        text-align: center;
+
+        a {
+            color: $main-color;
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .advantage {
+        &__card {
+            max-width: 260px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .advantage {
+        &__card {
+            max-width: 220px;
+        }
+    }
+}
+
+@media (max-width: 575px) {
+    .advantage {
+        &__wrapper {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &__card {
+            margin-bottom: 20px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
