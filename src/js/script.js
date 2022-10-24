@@ -1,5 +1,7 @@
 // Jquery and Slick Slider
 
+// const { on } = require("gulp");
+
 // Settings
 $(document).ready(function () {
     // Функциона карусели
@@ -37,6 +39,57 @@ $(document).ready(function () {
     };
     toggleSlide('.catalog-item__link');
     toggleSlide('.catalog-item__back');
+
+    // Modal
+    // Вытягиевает модальное окно 
+    $('[data-modal=consultation]').on('click', function () {
+        $('.overlay, #consultation').fadeIn('slow');
+    });
+    // "Крестик" закрывает любое модальное окно
+    $('.modal__close').on('click', function () {
+        $('.overlay, #consultation, #thanks, #order').fadeOut('slow');
+    });
+    // Модальное окно для кнопки купить 
+    $('.button_mini').each(function (i) {
+        $(this).on('click', function () {
+            $('#order .modal__descr').text($('.catalog-item__subtitle').eq(i).text());
+            $('.overlay, #order').fadeIn('slow');
+        })
+    });
+    // Валидация формы
+
+    function validateForms(form) {
+        $(form).validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                phone: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+
+            },
+            messages: {
+                name: {
+                    required: "Пожайлуста введите свое имя",
+                    minlength: jQuery.validator.format("Введите минимум {0} символа")
+                },
+
+                phone: "Введите свой телефон",
+                email: {
+                    required: "Пожалуйста введите свою почту",
+                    email: "Неправильно введен адрес почты"
+                }
+            }
+        });
+    }
+
+    validateForms('#consultation-form');
+    validateForms('#consultation form');
+    validateForms('#order form');
 });
 
 
@@ -67,4 +120,5 @@ $(document).ready(function () {
 // document.querySelector('.tiny-next').addEventListener('click', function () {
 //     slider.goTo('next');
 // });
+
 

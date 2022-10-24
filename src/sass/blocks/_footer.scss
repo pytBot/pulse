@@ -62,3 +62,12 @@
     }
 
 }
+
+@media (max-width: 575px) {
+    .footer {
+        &__info{
+            width: 70%;
+            min-height: 270px;
+        }
+    }
+}
