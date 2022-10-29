@@ -91,6 +91,46 @@ $(document).ready(function () {
     validateForms('#consultation-form');
     validateForms('#consultation form');
     validateForms('#order form');
+    // Отправка формы
+    $('form').submit(function (e) {
+        e.preventDefault();                 // отключает перезагрузку страницы
+
+        // Валидация формы
+        if (!$(this).valid()) {
+            return;
+        }
+
+        $.ajax({
+            type: "POST",                   // тип передачи данных
+            url: "mailer/smart.php",        // путь куда передаем данные
+            data: $(this).serialize()       // какие данные передаем
+        }).done(function () {
+            $(this).find("input").val("");
+            $('#consultation, #order').fadeOut();
+            $('.overlay, #thanks').fadeIn('slow');
+
+
+            $("form").trigger("reset");
+        });
+        return false;
+    });
+
+    // Scroll and pageup
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 1300) {
+            $('.pageup').fadeIn();
+        } else {
+            $('.pageup').fadeOut();
+        }
+    });
+
+    $("a[href^='#']").click(function () {
+        const _href = $(this).attr("href");
+        $("html, body").animate({scrollTop: $(_href).offset().top+"px"});
+        return false;
+    });
+
+    new WOW().init();
 });
 
 
